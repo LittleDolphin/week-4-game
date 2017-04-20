@@ -1,0 +1,118 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+//declare variables
+var computerRandomChar;
+var button1RandValue;
+var button2RandValue ;
+var button3RandValue ;
+var button4RandValue ;
+var yourTotal = 0;
+var wins=0;
+var losses=0;
+//this function will get a random value for each of the below:
+//1) Computer Generated Random Value
+//2) Random values for the button1, button2, button3, button4
+//It will also display the computer generated value on the page
+function getRandomValues(){
+	 computerRandomChar = Math.floor(Math.random() * 50)+50;
+	 button1RandValue = Math.floor(Math.random() * 50);
+	 button2RandValue = Math.floor(Math.random() * 50);
+	 button3RandValue = Math.floor(Math.random() * 50);
+	 button4RandValue = Math.floor(Math.random() * 50);
+	 $("#randNumber").html(computerRandomChar);
+	 yourTotal = 0;
+}
+//Call the function above to set the values
+getRandomValues();
+
+//when button1 is clicked, this event is triggered. We sum the total score of the player and call another function, ValidateGame() to validate if the user has won or lost
+$("#button1").click(function(){
+	yourTotal = yourTotal + button1RandValue;
+	
+	ValidateGame();
+});
+//when button2 is clicked, this event is triggered. We sum the total score of the player and call another function, ValidateGame() to validate if the user has won or lost
+$("#button2").click(function(){
+	yourTotal = yourTotal + button2RandValue;
+	
+	ValidateGame();
+});
+//when button3 is clicked, this event is triggered. We sum the total score of the player and call another function, ValidateGame() to validate if the user has won or lost
+$("#button3").click(function(){
+	yourTotal = yourTotal + button3RandValue;
+	
+	ValidateGame();
+});
+//when button4 is clicked, this event is triggered. We sum the total score of the player and call another function, ValidateGame() to validate if the user has won or lost
+$("#button4").click(function(){
+	yourTotal = yourTotal + button4RandValue;
+	
+	ValidateGame();
+});
+
+//This function will validate if the user's total score equals the computer generated random score. 
+//If they are same, 
+	//declare that the user has won
+	//increment the wins counter
+	//reset the values
+//If the user score is greater than the computer generated random score
+	//declare that the user has lost
+	//increment the lost counter
+	//reset the values
+function ValidateGame(){
+	$("#yourTotal").html(yourTotal.toString());
+	if(yourTotal == computerRandomChar)
+	{
+		alert("you won!");
+		wins++;
+		ResetValues();	
+		
+	}
+	
+	else if(yourTotal > computerRandomChar)
+		{
+			alert("you lost!");
+			losses++;
+			ResetValues();
+			
+		}
+}
+function ResetValues()
+{
+	getRandomValues();
+	$("#wins").html(wins.toString());
+		$("#losses").html(losses.toString());
+		$("#yourTotal").html("");
+			
+}
+
+});
+</script>
+</head>
+<body>
+<div>
+	Random Number=<label id="randNumber" name="randNumber">0</label>
+	</div>
+	</br>
+	<div>
+	Wins=<label id="wins" name="wins">0</label>
+	</div>
+	</br>
+	<div>
+	Losses=<label id="losses" name="losses" >0</label>
+	</div>
+	</br>
+	<div>
+		<input type="submit" id="button1" value="Button 1" style="float: left;"/>
+		<input type="submit" id="button2" value="Button 2" style="float: left;"/>
+		<input type="submit" id="button3" value="Button 3" style="float: left;"/>
+		<input type="submit" id="button4" value="Button 4" style="float: left;"/>
+	</div></br>
+	<div>
+	Your Total=<label id="yourTotal" name="yourTotal"/>
+	</div>
+</body>
+</html>
